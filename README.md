@@ -10,24 +10,6 @@ Useful to create test applications for plugins you are developing or simply to c
 **This plugin is heavily inspired from the script described from Burt Beckwith in the book Programming Grails and used in the spring-security-* plugins.**
 
 
-Installation
-------------
-
-In BuildConfig:
-
-```groovy
-    repositories {
-        // [...]
-        mavenRepo 'http://dl.bintray.com/enrico/maven'
-    }
-    plugins {
-        // [...]
-        build ':testapps:0.2.201401181120' {
-            export = false
-        }
-    }
-```
-
 Usage
 -----
 
