@@ -1,6 +1,8 @@
 Grails test apps plugin
 =======================
 
+[![Build Status](https://travis-ci.org/enr/grails-testapps.png?branch=master)](https://travis-ci.org/enr/grails-testapps)
+
 Provides a script and a DSL to create Grails applications to test your plugins.
 
 Useful to create test applications for plugins you are developing or simply to create Grails apps programmatically.
