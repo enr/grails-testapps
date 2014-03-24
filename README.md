@@ -70,13 +70,6 @@ Example:
 
 ```
 
-Release
--------
-
-    grailsw compile
-    grailsw maven-deploy --repository=bintray -plain-output -stacktrace
-
-Download url: http://dl.bintray.com/enrico/maven
 
 See also
 --------
