@@ -37,6 +37,7 @@ sample {
     // if empty will be set to the value of the env var GRAILS_HOME
     //grailsHome = "${grailsHomeRoot}/grails-${grailsVersion}"
     //grailsHome = 'c:/opt/grails-2.4.0.M1'
+    grailsHome = '/opt/grails/current'
 
     // version for the plugin under test (if any)
     //pluginVersion = version
@@ -100,15 +101,15 @@ environments {
 
 }
 
-/*
-v231 {
-    // this app will be created using Grails 2.3.1
-    grailsVersion = '2.3.1'
-    grailsHome = "${grailsHomeRoot}/grails-${grailsVersion}"
+
+v240M1 {
+    // this app will be created using Grails 2.4.0.M1
+    grailsHome = "/opt/gvm/grails/2.4.0.M1"
     pluginInstall = false
     projectDir = projectDirCommon
     plugins {
-        compile = [':spring-security-core:2.0-RC2']
+        compile = [':greenmail:1.3.4', ':mail:1.0.1']
+        runtime = [':famfamfam:1.0.1']
     }
 }
-*/
+
