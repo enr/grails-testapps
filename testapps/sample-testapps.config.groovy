@@ -11,9 +11,6 @@
 // base dir for .grails dir
 //String dotGrailsCommon = '/home/user/.grails'
 
-// base dir for different Grails installations
-//String grailsHomeRoot = '/opt/grails'
-
 // path where test apps will be created
 //String projectDirCommon = '/opt/grails/testapps'
 String projectDirCommon = new File('target').absolutePath
@@ -28,8 +25,7 @@ sample {
     // ${HOME}/.grails/wrapper/grails-${version}/bin/grails
     //grailsw = true
 
-    // this app doen't set Grails version and home, so it will be created using the standard installation of Grails
-
+    // if the app doesn't set Grails version and home, it will be created using the standard installation of Grails
     // the Grails version to use
     //grailsVersion = '2.3.3'
     //dotGrails = dotGrailsCommon
@@ -42,7 +38,7 @@ sample {
     // version for the plugin under test (if any)
     //pluginVersion = version
 
-    // don't install "testapps" plugin
+    // don't install the plugin under test (in this case the "testapps" plugin)
     pluginInstall = false
 
     // directory where test apps will be created in

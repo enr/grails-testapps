@@ -29,7 +29,7 @@ For every app in the described in the configuration file, the script:
 
 - creates the test application using `grails create-app`
 
-- adds the path `./testapps-config.groovy` to config locations;  
+- adds the path `./testapps-config.groovy` to config locations (in `grails-app/conf/Config.groovy`);  
   this way you can put a file with the same name in the templates (ie `testapps/testapps-config.groovy`) dir and this will be loaded in the app
 
 - adds a lot of Maven repo to BuildConfig to minimize deps fetching problems
@@ -39,7 +39,7 @@ For every app in the described in the configuration file, the script:
 - run scripts registered in the configuration for the given app
 
 - copy `testapps/` directory contents to the apps root directory:
-  `all/` directory contents are copied into every app, other directories are copied in the app named after the directory overriding the `all/` files.
+  `all/` directory contents are copied into every app defined in the testapps file, other directories are copied in the app named after the directory overriding the `all/` files.
 
 
 Create apps with different Grails versions
@@ -70,11 +70,14 @@ Example:
 
 ```
 
+5 minutes test
+--------------
+
+[testapps directory](testapps) contains a working and commented example: run it with: `grails compile && grails create-testapps testapps/sample-testapps.config.groovy -plain-output`
+
 
 See also
 --------
-
-- [testapps directory](testapps) contains a working example: run it with: `grails compile && grails create-testapps testapps/sample-testapps.config.groovy -plain-output`
 
 - one of the scripts inspiring this plugin: [spring-security-ui/CreateS2UiTestApps](https://github.com/grails-plugins/grails-spring-security-ui/blob/master/scripts/CreateS2UiTestApps.groovy)
 
