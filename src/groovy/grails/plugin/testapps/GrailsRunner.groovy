@@ -9,6 +9,9 @@ class GrailsRunner {
     String dotGrails
     String grailsVersion
 
+    // TODO: make it configurable
+    boolean ignoreFailure = false
+
     def ant
 
     GrailsRunner() {
@@ -118,7 +121,7 @@ class GrailsRunner {
         println " > cd ${dir}"
         println " > ${exe} ${action} ${extraArgs?.join(' ') ?: ''}"
 
-        ant.exec(    executable: exe,
+        ant.exec(   executable: exe,
                     dir: dir,
                     failonerror: false,
                     resultproperty: resultproperty,
@@ -135,7 +138,7 @@ class GrailsRunner {
 
         int exitCode = ant.project.getProperty(resultproperty) as Integer
         if (exitCode && !ignoreFailure) {
-            exit exitCode
+           throw new IllegalStateException("Grails ${action} failed. See above for output.")
         }
     }
 }

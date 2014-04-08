@@ -60,13 +60,13 @@ ${scope} '${pluginCoords}'
         return logConfigurationBlock
     }
 
-    public void editBuildConfig(String mavenLocalRepo) {
+    public void editBuildConfig(String mavenLocalRepo, List customRepos = []) {
         File buildConfig = new File(basedir, paths.grailsBuildConfig())  
-        String contents = editedBuildConfigText(buildConfig.text, mavenLocalRepo)
+        String contents = editedBuildConfigText(buildConfig.text, mavenLocalRepo, customRepos)
         buildConfig.withWriter { it.writeLine contents }
     }
 
-    String editedBuildConfigText(String original, String mavenLocalRepo) {
+    String editedBuildConfigText(String original, String mavenLocalRepo, List customRepos = []) {
         if (!original) {
             throw new IllegalArgumentException("Error editing BuildConfig... No content found")
         }
@@ -81,16 +81,22 @@ ${scope} '${pluginCoords}'
         // setup mavenLocal
         contents = contents.replace('mavenLocal()', "\nmavenLocal('${mavenLocalRepo}')")
 
+        String customReposDefinitions = ''
+        for (repo in customRepos) {
+            String repoDefinition = "mavenRepo '${repo}'"
+            customReposDefinitions = "${customReposDefinitions}\n${repoDefinition}"
+        }
         // add repositories
-        contents = contents.replace('//mavenRepo "http://repository.jboss.com/maven2/"', '''
-mavenRepo "http://repo.spring.io/release"
-mavenRepo "http://repo.spring.io/external"
-mavenRepo "http://repo.spring.io/milestone"
-mavenRepo "http://snapshots.repository.codehaus.org"
-mavenRepo "http://repository.codehaus.org"
-mavenRepo "http://download.java.net/maven/2/"
-mavenRepo "http://repository.jboss.com/maven2/"
-''')
+        contents = contents.replace('//mavenRepo "http://repository.jboss.com/maven2/"', """
+mavenRepo 'http://repo.spring.io/release'
+mavenRepo 'http://repo.spring.io/external'
+mavenRepo 'http://repo.spring.io/milestone'
+mavenRepo 'http://snapshots.repository.codehaus.org'
+mavenRepo 'http://repository.codehaus.org'
+mavenRepo 'http://download.java.net/maven/2/'
+mavenRepo 'http://repository.jboss.com/maven2/'
+${customReposDefinitions}
+""")
 
         // remove controversial plugins
         //contents = contents.replace('runtime ":database-migration:', '//database-migration')

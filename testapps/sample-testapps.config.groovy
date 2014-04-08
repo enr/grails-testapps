@@ -33,7 +33,7 @@ sample {
     // if empty will be set to the value of the env var GRAILS_HOME
     //grailsHome = "${grailsHomeRoot}/grails-${grailsVersion}"
     //grailsHome = 'c:/opt/grails-2.4.0.M1'
-    grailsHome = '/opt/grails/current'
+    //grailsHome = '/opt/grails/current'
 
     // version for the plugin under test (if any)
     //pluginVersion = version
@@ -46,7 +46,7 @@ sample {
 
     // append timestamp to testapp name?
     // default is true, you have to specify only if you don't want to
-    timestamp = false
+    //timestamp = false
 
     // other plugins to install into the test app
     plugins {
@@ -55,8 +55,11 @@ sample {
     }
 
     dependencies {
-        compile = ['org.scribe:scribe:1.3.5']
+        compile = ['org.scribe:scribe:1.3.6']
     }
+
+    // custom repositories
+    customRepos = ['https://raw.github.com/fernandezpablo85/scribe-java/mvn-repo']
     
     // will be appended to grails-app/conf/Config.groovy
     customConfig = '''
@@ -97,7 +100,7 @@ environments {
 
 }
 
-
+/*
 v240M1 {
     // this app will be created using Grails 2.4.0.M1
     grailsHome = "/opt/gvm/grails/2.4.0.M1"
@@ -108,4 +111,4 @@ v240M1 {
         runtime = [':famfamfam:1.0.1']
     }
 }
-
+*/

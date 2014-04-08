@@ -53,6 +53,7 @@ logDebugPackages = []
 logInfoPackages = []
 dependencies = [:]
 scripts = []
+customRepos = []
 
 // use grailsw when possible?
 grailsw = false
@@ -155,6 +156,7 @@ private void init(String name, config) {
     plugins = config.plugins
     dependencies = config.dependencies
     scripts = config.scripts
+    customRepos = config.customRepos
     customConfig = config.customConfig ?: ''
     logDebugPackages = config.log.debug ?: []
     logInfoPackages = config.log.info ?: []
@@ -203,7 +205,7 @@ private void addLogs() {
 }
 
 private void editBuildConfig() {
-    currentTestapp.editBuildConfig(mavenLocalRepo)
+    currentTestapp.editBuildConfig(mavenLocalRepo, customRepos)
 }
 
 private void copySampleFiles() {
