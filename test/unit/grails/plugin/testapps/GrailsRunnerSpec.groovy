@@ -6,6 +6,8 @@ class GrailsRunnerSpec extends Specification {
 
 	private static final boolean OS_WIN = System.getProperty("os.name").toLowerCase().contains("windows")
 
+	private static final String USER_HOME = System.getProperty("user.home")
+
 	GrailsRunner grails
 
 	@IgnoreIf({!OS_WIN})
@@ -33,6 +35,7 @@ class GrailsRunnerSpec extends Specification {
         given:
         grails = new GrailsRunner(grailsHome, grailsHome)
         grails.privilegeGrailsw(grailsw)
+        grails.setGrailsVersion(grailsVersion)
 
         and:
         def bin = grails.grailsBin(grailswAllowed)
@@ -41,8 +44,10 @@ class GrailsRunnerSpec extends Specification {
         bin.contains(grailsBinPath)
 
         where:
-        grailsHome                                  | grailsw   | grailswAllowed    | grailsBinPath
-        "/opt/grails/current"                       | true      | true              | "./grailsw"
+        grailsHome              | grailsVersion    | grailsw   | grailswAllowed    | grailsBinPath
+        "/opt/grails/current"   | '2.3.8'          | true      | true              | "./grailsw"
+        "/opt/grails/current"   | '2.3.8'          | true      | false             | "${USER_HOME}/.grails/wrapper/2.3.8/grails-2.3.8/bin/grails"
+        null                    | '2.3.8'          | true      | false             | "${USER_HOME}/.grails/wrapper/2.3.8/grails-2.3.8/bin/grails"
     }
 
     def "grails executable resolution multiplat"() {
@@ -60,7 +65,7 @@ class GrailsRunnerSpec extends Specification {
         where:
         grailsHome                                  | grailsw   | grailswAllowed    | grailsBinPath
         "/opt/grails/current"                       | true      | true              | "grailsw"
-        "/opt/grails/current"                       | true      | false             | "${System.getProperty('user.home')}/.grails/wrapper/2.3.6/grails-2.3.6/bin/grails".replace(File.separator, '/')
+        "/opt/grails/current"                       | true      | false             | "${USER_HOME}/.grails/wrapper/2.3.6/grails-2.3.6/bin/grails".replace(File.separator, '/')
         "/opt/grails/current"                       | false     | true              | "/opt/grails/current/bin/grails"
     }
 }  

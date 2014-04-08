@@ -128,12 +128,22 @@ private void init(String name, config) {
 
     grailsw = config.grailsw ?: false
     grailsConsole.updateStatus "Using Grails Wrapper? ${grailsw}"
-    if (".." == "${grailsHome}" && grailsw) {
+    // script ran using ./grailsw but no grailsHome set.
+    // this is a strange situation... should I throw an error?
+    // atm it is used the grails bin in $HOME/wrapper but this is not executable by default in *nix systems
+    boolean scriptRanWithGrailsw = (!(config.grailsHome) && (new File('..').getCanonicalPath() == new File(grailsHome).getCanonicalPath()) && !(new File("${grailsHome}/bin/grails").exists()))
+    if (scriptRanWithGrailsw) {
         grailsHome = paths.wrapperGrailsHome(GrailsUtil.grailsVersion)
     }
     grailsConsole.updateStatus "Using Grails home ${grailsHome}"
     if (!new File(grailsHome).exists()) {
         die "Grails home ${grailsHome} not found"
+    }
+    if (!new File("${grailsHome}/bin/grails").canExecute()) {
+        die """
+Grails ${grailsHome}/bin/grails not executable...
+Probably you have set grailsw=true but not set a proper grailsHome to use when ./grailsw is not allowed.
+"""
     }
 
     dotGrails = config.dotGrails ?: userHomeDir + File.separator + '.grails'
@@ -156,7 +166,7 @@ private void init(String name, config) {
     plugins = config.plugins
     dependencies = config.dependencies
     scripts = config.scripts
-    customRepos = config.customRepos
+    customRepos = config.customRepos ?: []
     customConfig = config.customConfig ?: ''
     logDebugPackages = config.log.debug ?: []
     logInfoPackages = config.log.info ?: []
