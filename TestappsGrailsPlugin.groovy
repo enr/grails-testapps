@@ -1,6 +1,6 @@
 class TestappsGrailsPlugin {
 
-    def version = "0.4.0"
+    def version = "0.5.1"
     def grailsVersion = "2.3 > *"
 
     def title = "Testapps Plugin"
