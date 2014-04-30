@@ -1,6 +1,9 @@
 package grails.plugin.testapps
 
-@SuppressWarnings(['Println', 'ThrowException'])
+/**
+ * Class responsible for build and run a Grails command.
+ */
+@SuppressWarnings(['Println'])
 class GrailsRunner {
 
     private static final boolean OS_WIN = System.getProperty("os.name").toLowerCase().contains("windows")
@@ -39,7 +42,7 @@ class GrailsRunner {
         // so we need additional checks
         def applicationProperties = new File(appBaseDir, 'application.properties')
         if (!applicationProperties.exists()) {
-            throw new Exception("grails create-app ${appName} fail")
+            throw new IllegalStateException("grails create-app ${appName} fail")
         }
         return new GrailsProject(appBaseDir)
     }
@@ -47,12 +50,10 @@ class GrailsRunner {
     String grailsBin(boolean grailswAllowed) {
         def ext = OS_WIN ? '.bat' : ''
         if (grailswAllowed && grailsw) {
-            println "grailswAllowed && grailsw"
             def pre = OS_WIN ? '' : './'
             return "${pre}grailsw${ext}"
         }
         if (!grailswAllowed && grailsw) {
-            println " ! grailswAllowed && grailsw"
             String wg = Paths.wrapperGrails(this.grailsVersion)
             return "${wg}${ext}"
         }

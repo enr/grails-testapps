@@ -2,6 +2,9 @@ package grails.plugin.testapps
 
 import spock.lang.*
 
+/**
+ * Specification for GrailsProject.
+ */
 class GrailsProjectSpec extends Specification {
 
 	GrailsProject project

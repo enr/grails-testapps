@@ -22,16 +22,13 @@ grails.project.dependency.resolution = {
         mavenCentral()
     }
 
-    dependencies {
-        compile 'org.codenarc:CodeNarc:0.19'
-    }
-
     plugins {
         build(":release:3.0.1",
               ":rest-client-builder:1.0.3") {
             export = false
         }
         test ":code-coverage:1.2.7"
+        compile ":codenarc:0.21"
     }
 }
 

@@ -2,6 +2,9 @@ package grails.plugin.testapps
 
 import spock.lang.*
 
+/**
+ * Specification for GrailsRunner.
+ */
 class GrailsRunnerSpec extends Specification {
 
 	private static final boolean OS_WIN = System.getProperty("os.name").toLowerCase().contains("windows")
@@ -10,7 +13,7 @@ class GrailsRunnerSpec extends Specification {
 
 	GrailsRunner grails
 
-	@IgnoreIf({!OS_WIN})
+	@IgnoreIf({ !OS_WIN })
     def "grails executable resolution on win box"() {
         given:
         grails = new GrailsRunner(grailsHome, grailsHome)
@@ -30,7 +33,7 @@ class GrailsRunnerSpec extends Specification {
         /C:\Documents and settings\grails\2.3.3/    | false     | false             | "C:/Documents and settings/grails/2.3.3/bin/grails.bat"
     }
 
-	@IgnoreIf({OS_WIN})
+	@IgnoreIf({ OS_WIN })
     def "grails executable resolution on nix box"() {
         given:
         grails = new GrailsRunner(grailsHome, grailsHome)

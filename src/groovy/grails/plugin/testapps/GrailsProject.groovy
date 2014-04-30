@@ -1,5 +1,8 @@
 package grails.plugin.testapps
 
+/**
+ * Class representing a Grails project.
+ */
 class GrailsProject {
 
     String basedir

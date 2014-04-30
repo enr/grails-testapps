@@ -1,5 +1,8 @@
 package grails.plugin.testapps
 
+/**
+ * Utility class pertaining paths.
+ */
 class Paths {
 
     public static final String GRAILS_WRAPPER_BASE = "${System.getProperty('user.home')}/.grails/wrapper"
