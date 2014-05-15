@@ -11,7 +11,7 @@ chmod +x ./grailsw
 ./grailsw test-app --non-interactive -plain-output
 ./grailsw package-plugin --non-interactive -plain-output
 
-if [[ "${TRAVIS_BRANCH}" == 'master' && "${TRAVIS_REPO_SLUG}" == "enr/grails-spring-security-oauth" && "${TRAVIS_PULL_REQUEST}" == 'false' ]]; then
+if [[ "${TRAVIS_BRANCH}" == 'master' && "${TRAVIS_REPO_SLUG}" == "enr/grails-testapps" && "${TRAVIS_PULL_REQUEST}" == 'false' ]]; then
     ./grailsw publish-plugin --no-scm --allow-overwrite --non-interactive -plain-output
 else
     echo "Not on master branch, so not publishing"
