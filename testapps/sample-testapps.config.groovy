@@ -102,7 +102,7 @@ environments {
 
 String gvmDir = System.getenv('GVM_DIR')
 
-v240M1 {
+sample2 {
     // this app will be created using Grails 2.4.0.M1
     grailsHome = "${gvmDir}/grails/2.4.0.M1"
     pluginInstall = false
